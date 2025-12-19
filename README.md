@@ -94,13 +94,13 @@ names: ['aircraft', 'oil-tank', 'overpass', 'playground']
 ```
 
 **Training and test of the YOLO-WDD model and YOLOv8n model**
-1. Training command for YOLO-WDD model
+1. Training command for HAT-YOLO model
 ```
-yolo detect train model=YOLO-WDD.yaml data=dataset\wood-defect.yaml imgsz=640 workers=8 batch=8 device=0 epochs=300 line_thickness=2 patience=300
+yolo detect train model=HAT-YOLO.yaml data=dataset\wood-defect.yaml imgsz=640 workers=8 batch=8 device=0 epochs=300 line_thickness=2 patience=300
 ```
-2. Test command for YOLO-WDD model
+2. Test command for HAT-YOLO model
 ```
-yolo detect predict model=YOLO-WDD-best.pt source="E:\yolov8-gpu\dataset\wood-defect-dataset\images\test" save=True
+yolo detect predict model=HAT-YOLO-best.pt source="E:\yolov8-gpu\dataset\wood-defect-dataset\images\test" save=True
 ```
 3. Training command for YOLOv8n model
 ```
