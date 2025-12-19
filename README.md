@@ -132,6 +132,69 @@ yolo detect predict model=YOLOv8n-best.pt source="E:\yolov8-gpu\dataset\RSOD-DAT
 
 
 
+**Test the HAT-YOLO model and YOLOv8n model using VEDAI dataset on Google Colab GPU framework**
+1. Connect the GPU in Google drive
+```
+import tensorflow as tf
 
+if tf.test.gpu_device_name():
+    print("GPU is connected")
+else:
+    print("Using CPU")
+```
+2. Mount Google Drive
+```
+from google.colab import drive
+drive.mount('/content/gdrive')
+```
+3. Access Google Drive Folder
+```
+import os
+os.chdir("gdrive/MyDrive")
+```
+4. Create a folder named YOLOv8-custom as root folder
+```
+!mkdir yolov8n-custom
+```
+5. Enter the created yolov8n-custom root folder
+```
+%cd yolov8n-custom
+```
+6. Install ultralytics
+```
+%pip install ultralytics
 
+import ultralytics
+ultralytics.checks()
+```
+7. Run the following code for object detection, inference time calculation and FPS calculation on VEDAI dataset test images using the proposed HAT-YOLO model. 
+```
+import time
+from ultralytics import YOLO
+
+model = YOLO('/content/gdrive/MyDrive/HAT-YOLO-best.pt')
+source = '/content/gdrive/MyDrive/VEDAI-TEST-IMAGES'
+
+start_time = time.time()
+results = model.predict(source=source, save=True)
+end_time = time.time()
+
+fps = len(results) / (end_time - start_time)
+print(f"FPS: {fps}")
+```
+8. Run the following code for object detection, inference time calculation and FPS calculation on VEDAI dataset test images using the YOLOv8n model. 
+```
+import time
+from ultralytics import YOLO
+
+model = YOLO('/content/gdrive/MyDrive/YOLOv8n-best.pt')
+source = '/content/gdrive/MyDrive/VEDAI-TEST-IMAGES'
+
+start_time = time.time()
+results = model.predict(source=source, save=True)
+end_time = time.time()
+
+fps = len(results) / (end_time - start_time)
+print(f"FPS: {fps}")
+```
 
