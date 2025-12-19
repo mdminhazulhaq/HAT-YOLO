@@ -1,5 +1,5 @@
 # HAT-YOLO
-HAT-YOLO is an improved lightweight YOLOv8n model that integrates dual channel–spatial attention, lightweight transformer-based attention, and GELU-enhanced modules for efficient UAV object detection on low-memory devices. Trained on VEDAI and RSOD, it achieves higher mAP and real-time detection speed. 
+HAT-YOLO is an improved lightweight YOLOv8n model that integrates dual channel–spatial attention, lightweight transformer-based attention, and GELU-enhanced modules for efficient UAV object detection on low-memory devices. Trained on VEDAI and RSOD datasets, it achieves higher mAP accuracy while running at real-time detection speed. 
 
 **Environmental Setup tools**
 This setup is designed for a Windows 10 environment with an NVIDIA RTX A2000 GPU.
@@ -32,7 +32,7 @@ This setup is designed for a Windows 10 environment with an NVIDIA RTX A2000 GPU
    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ```
 
-11. Install Ultralytics YOLO:
+11. Install Ultralytics:
 
 ```
    pip install ultralytics
@@ -40,7 +40,7 @@ This setup is designed for a Windows 10 environment with an NVIDIA RTX A2000 GPU
 
 **Dataset**
 The VEDAI and RSOD datasets are large, so they are not uploaded into the repository.
-You may download them from publicly available sources and prepare them in YOLO format.
+You may download them from publicly available sources and label the images into YOLO format.
 
 **Data Preparation**
 1. Place the images and labels into the following structure:
@@ -73,7 +73,7 @@ You may download them from publicly available sources and prepare them in YOLO f
 
 ```
    # VEDAI Dataset Path
-path: dataset/VEDAI
+path: dataset/VEDAI-DATASET
 
 train: images/train
 val: images/val
@@ -84,7 +84,7 @@ names: ['car', 'truck', 'pickup', 'tractor', 'boat', 'van', 'other', 'campingCar
 Example RSOD YAML file
 ```
    # RSOD Dataset Path
-path: dataset/RSOD
+path: dataset/RSOD-DATASET
 
 train: images/train
 val: images/val
@@ -93,8 +93,8 @@ test: images/test
 names: ['aircraft', 'oil-tank', 'overpass', 'playground']
 ```
 
-**Training and test of the HAT-YOLO model and YOLOv8n model using VEDAI dataset**
-1. Training command for HAT-YOLO model
+**Train and test of the HAT-YOLO model and YOLOv8n model using VEDAI dataset on NVIDIA RTX A2000 Laptop GPU**
+1. Training command for the proposed HAT-YOLO model
 ```
 yolo detect train model=HAT-YOLO.yaml data=dataset\VEDAI-DATASET.yaml imgsz=640 workers=8 batch=8 device=0 epochs=300 line_thickness=2 patience=300
 ```
@@ -112,7 +112,23 @@ yolo detect predict model=YOLOv8n-best.pt source="E:\yolov8-gpu\dataset\VEDAI-DA
 ```
 
 
-
+**Train and test of the HAT-YOLO model and YOLOv8n model using RSOD dataset on NVIDIA RTX A2000 Laptop GPU**
+1. Training command for the proposed HAT-YOLO model
+```
+yolo detect train model=HAT-YOLO.yaml data=dataset\RSOD-DATASET.yaml imgsz=640 workers=8 batch=8 device=0 epochs=300 line_thickness=2 patience=300
+```
+2. Test command for HAT-YOLO model
+```
+yolo detect predict model=HAT-YOLO-best.pt source="E:\yolov8-gpu\dataset\RSOD-DATASET\images\test" save=True
+```
+3. Training command for YOLOv8n model
+```
+yolo detect train model=yolov8n.yaml data=dataset\RSOD-DATASET.yaml imgsz=640 workers=8 batch=8 device=0 epochs=300 line_thickness=2 patience=300
+```
+4. Test command for YOLOv8n model
+```
+yolo detect predict model=YOLOv8n-best.pt source="E:\yolov8-gpu\dataset\RSOD-DATASET\images\test" save=True
+```
 
 
 
