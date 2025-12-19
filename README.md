@@ -93,22 +93,22 @@ test: images/test
 names: ['aircraft', 'oil-tank', 'overpass', 'playground']
 ```
 
-**Training and test of the YOLO-WDD model and YOLOv8n model**
+**Training and test of the HAT-YOLO model and YOLOv8n model using VEDAI dataset**
 1. Training command for HAT-YOLO model
 ```
-yolo detect train model=HAT-YOLO.yaml data=dataset\wood-defect.yaml imgsz=640 workers=8 batch=8 device=0 epochs=300 line_thickness=2 patience=300
+yolo detect train model=HAT-YOLO.yaml data=dataset\VEDAI-DATASET.yaml imgsz=640 workers=8 batch=8 device=0 epochs=300 line_thickness=2 patience=300
 ```
 2. Test command for HAT-YOLO model
 ```
-yolo detect predict model=HAT-YOLO-best.pt source="E:\yolov8-gpu\dataset\wood-defect-dataset\images\test" save=True
+yolo detect predict model=HAT-YOLO-best.pt source="E:\yolov8-gpu\dataset\VEDAI-DATASET\images\test" save=True
 ```
 3. Training command for YOLOv8n model
 ```
-yolo detect train model=yolov8n.yaml data=dataset\wood-defect.yaml imgsz=640 workers=8 batch=8 device=0 epochs=300 line_thickness=2 patience=300
+yolo detect train model=yolov8n.yaml data=dataset\VEDAI-DATASET.yaml imgsz=640 workers=8 batch=8 device=0 epochs=300 line_thickness=2 patience=300
 ```
 4. Test command for YOLOv8n model
 ```
-yolo detect predict model=YOLOv8n-best.pt source="E:\yolov8-gpu\dataset\wood-defect-dataset\images\test" save=True
+yolo detect predict model=YOLOv8n-best.pt source="E:\yolov8-gpu\dataset\VEDAI-DATASET\images\test" save=True
 ```
 
 
